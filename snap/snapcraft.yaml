@@ -1,0 +1,152 @@
+name: motion
+adopt-info: motion
+summary: Monitors video signals from many types of cameras.
+description: |
+  Motion is a program that monitors the video signal from one or more cameras
+  and is able to detect if a significant part of the picture has changed.
+  Or in other words, it can detect motion.
+
+  Find out more about motion at
+  https://github.com/Motion-Project/motion
+
+  Find out more about the snap of motion at
+  https://github.com/ogra1/motion-snap
+
+grade: stable
+confinement: strict
+
+apps:
+  motion-daemon:
+    command: motion -c $SNAP_DATA/motion.conf
+    daemon: simple
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - camera
+      - network
+      - network-bind
+      - opengl
+  motion:
+    command: motion -c $SNAP_DATA/motion.conf
+    environment:
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pulseaudio
+    plugs:
+      - camera
+      - network
+      - network-bind
+      - opengl
+parts:
+  motion:
+    source: https://github.com/Motion-Project/motion.git
+    source-depth: 1
+    source-tag: release-4.2
+    plugin: make
+    override-build: |
+      VER="$(git tag|tail -1|sed 's/release-//')"
+      echo "setting version to $VER"
+      snapcraftctl set-version $VER
+      autoreconf -fiv
+      ./configure --prefix=/usr
+      snapcraftctl build
+    build-packages:
+      - autoconf
+      - automake
+      - pkgconf
+      - libtool
+      - libjpeg8-dev
+      - build-essential
+      - libzip-dev
+      - gettext
+      - libmicrohttpd-dev
+      - libavformat-dev
+      - libavcodec-dev
+      - libavutil-dev
+      - libswscale-dev
+      - libavdevice-dev
+    stage-packages:
+      - libmodplug1
+      - libmp3lame0
+      - libnuma1
+      - libogg0
+      - libopenal1
+      - libopencv-core2.4v5
+      - libopencv-imgproc2.4v5
+      - libopenjpeg5
+      - libopus0
+      - liborc-0.4-0
+      - libpostproc-ffmpeg53
+      - libpulse0
+      - libraw1394-11
+      - librtmp1
+      - libschroedinger-1.0-0
+      - libsdl1.2debian
+      - libshine3
+      - libsnappy1v5
+      - libsndfile1
+      - libsodium18
+      - libsoxr0
+      - libspeex1
+      - libssh-gcrypt-4
+      - libswresample-ffmpeg1
+      - libswscale-ffmpeg3
+      - libtbb2
+      - libtheora0
+      - libtwolame0
+      - libusb-1.0-0
+      - libva1
+      - libvorbis0a
+      - libvorbisenc2
+      - libvpx3
+      - libwavpack1
+      - libwebp5
+      - libx11-6
+      - libx11-xcb1
+      - libx264-148
+      - libx265-79
+      - libxau6
+      - libxcb1
+      - libxcb-dri2-0
+      - libxcb-dri3-0
+      - libxcb-glx0
+      - libxcb-present0
+      - libxcb-shape0
+      - libxcb-shm0
+      - libxcb-sync1
+      - libxcb-xfixes0
+      - libxdamage1
+      - libxdmcp6
+      - libxext6
+      - libxfixes3
+      - libxml2
+      - libxshmfence1
+      - libxv1
+      - libxvidcore4
+      - libxxf86vm1
+      - libzmq5
+      - libzvbi0
+      - libass5
+      - libavc1394-0
+      - libavcodec-ffmpeg56
+      - libavdevice-ffmpeg56
+      - libavfilter-ffmpeg5
+      - libavformat-ffmpeg56
+      - libavresample-ffmpeg2
+      - libbluray1
+      - libbs2b0
+      - libcdio13
+      - libcdio-cdda1
+      - libcdio-paranoia1
+      - libcrystalhd3
+      - libdc1394-22
+      - libflite1
+      - libfontconfig1
+      - libfribidi0
+      - libglu1-mesa
+      - libgme0
+      - libgraphite2-3
+      - libgsm1
+      - libharfbuzz0b
+      - libiec61883-0
+      - libjack-jackd2-0
+      - libjpeg-turbo8
+      - libmicrohttpd10

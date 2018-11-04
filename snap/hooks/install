@@ -1,0 +1,8 @@
+#! /bin/sh
+
+[ -e $SNAP_DATA/motion.conf ] || \
+    cp $SNAP/usr/share/motion/examples/motion-dist.conf $SNAP_DATA/motion.conf
+
+sed -i 's/^webcontrol_localhost.*$/webcontrol_localhost off/' $SNAP_DATA/motion.conf
+sed -i 's/^webcontrol_parms.*$/webcontrol_parms 2/' $SNAP_DATA/motion.conf
+sed -i 's/^stream_localhost.*$/stream_localhost off/' $SNAP_DATA/motion.conf
