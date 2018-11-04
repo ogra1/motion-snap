@@ -66,7 +66,6 @@ parts:
     stage-packages:
       - libmodplug1
       - libmp3lame0
-      - libnuma1
       - libogg0
       - libopenal1
       - libopencv-core2.4v5
@@ -149,5 +148,5 @@ parts:
       - libjack-jackd2-0
       - libjpeg-turbo8
       - libmicrohttpd10
-      - to amd64: [ "libcrystalhd3:amd64" ]
-      - to i386: [ "libcrystalhd3:i386" ]
+      - to amd64: [ "libcrystalhd3:amd64", "libnuma1:amd64" ]
+      - to i386: [ "libcrystalhd3:i386", "libnuma1:i386" ]
