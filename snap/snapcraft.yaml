@@ -136,7 +136,6 @@ parts:
       - libcdio13
       - libcdio-cdda1
       - libcdio-paranoia1
-      - libcrystalhd3
       - libdc1394-22
       - libflite1
       - libfontconfig1
@@ -150,3 +149,5 @@ parts:
       - libjack-jackd2-0
       - libjpeg-turbo8
       - libmicrohttpd10
+      - to amd64: [ "libcrystalhd3:amd64" ]
+      - to i386: [ "libcrystalhd3:i386" ]
